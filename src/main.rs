@@ -8,5 +8,5 @@ fn main() {
         Err(error) => panic!("Problem opening the file: {:?}", error),
     };
 
-    print!("{:?}", greeting_file);
+    println!("{:?}", greeting_file);
 }
