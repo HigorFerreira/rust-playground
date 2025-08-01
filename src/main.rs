@@ -1,44 +1,12 @@
-use std::collections::HashMap;
+use std::fs::File;
 
 fn main() {
-    let mut scores = HashMap::new();
+    let greeting_file_result = File::open("hello.txt");
 
-    scores.insert(String::from("Blue"), 10);
-    scores.insert(String::from("Yellow"), 50);
+    let greeting_file = match greeting_file_result {
+        Ok(file) => file,
+        Err(error) => panic!("Problem opening the file: {:?}", error),
+    };
 
-    let team_name = String::from("Blue");
-    let score = scores.get(&team_name).copied().unwrap_or(0);
-
-    println!("Team: {team_name}, Score: {score}");
-
-    println!("Iterating over scores:");
-    for (team, score) in &scores {
-        println!("{team} --> {score}");
-    }
-
-    println!("\n");
-
-    {
-        let mut scores = HashMap::new();
-        scores.insert(String::from("Blue"), 10);
-
-        scores.entry(String::from("Yellow")).or_insert(50);
-        scores.entry(String::from("Blue")).or_insert(50);
-
-        println!("{scores:?}");
-    }
-    println!("\n");
-
-    {
-        let text = "hello world wonderful world";
-
-        let mut map = HashMap::new();
-
-        for word in text.split_whitespace() {
-            let count = map.entry(word).or_insert(0);
-            *count += 1;
-        }
-
-        println!("{map:?}")
-    }
+    print!("{:?}", greeting_file);
 }
