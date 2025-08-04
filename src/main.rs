@@ -16,3 +16,7 @@ fn main() {
 fn read_username_from_file() -> Result<String, io::Error> {
     fs::read_to_string("hello.txt")
 }
+
+fn last_char_of_first_line(text: &str) -> Option<char> {
+    text.lines().next()?.chars().last()
+}
