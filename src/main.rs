@@ -1,7 +1,10 @@
 use std::cmp::Ordering;
 use std::io;
-
 use rand::Rng;
+
+pub mod guessing_game;
+
+use guessing_game::Guess;
 
 fn main() {
     println!("Guess the number!");
@@ -17,19 +20,14 @@ fn main() {
             .read_line(&mut guess)
             .expect("Failed to read line");
 
-        let guess: i32 = match guess.trim().parse() {
-            Ok(num) => num,
+        let guess: Guess = match guess.trim().parse() {
+            Ok(num) => Guess::new(num),
             Err(_) => continue,
         };
 
-        if guess < 1 || guess > 100 {
-            println!("The secret number will be between 1 and 100.");
-            continue;
-        }
+        println!("You guessed: {}", guess.value());
 
-        println!("You guessed: {guess}");
-
-        match guess.cmp(&secret_number) {
+        match guess.value().cmp(&secret_number) {
             Ordering::Less => println!("Too small!"),
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
