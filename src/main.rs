@@ -1,5 +1,4 @@
-use rust_playground::aggregator::{SocialPost, NewsArticle, Summary};
-
+use rust_playground::aggregator::{SocialPost, NewsArticle, notify};
 fn main() {
     let post = SocialPost {
         username: String::from("horse_ebooks"),
@@ -20,6 +19,6 @@ fn main() {
         ),
     };
 
-    println!("1 new social post: {}", post.summarize());
-    println!("New article available! {}", article.summarize());
+    notify(&article);
+    notify(&post);
 }

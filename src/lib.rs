@@ -35,4 +35,8 @@ pub mod aggregator {
             format!("{}: {}", self.username, self.content)
         }
     }
+
+    pub fn notify(item: &impl Summary){
+        println!("Breaking news! {}", item.summarize())
+    }
 }
