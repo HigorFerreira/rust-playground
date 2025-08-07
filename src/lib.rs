@@ -36,7 +36,15 @@ pub mod aggregator {
         }
     }
 
-    pub fn notify(item: &impl Summary){
-        println!("Breaking news! {}", item.summarize())
+    /**
+     * Using impl Trait is appropriate if we want this function
+     * to allow item1 and item2 to have different types
+     * (as long as both types implement Summary).
+     * If we want to force both parameters to have the same type,
+     * however, we must use a trait bound, like this:
+     */
+    pub fn notify<T: Summary>(item1: &T, item2: &T){
+        println!("Breaking news! {}", item1.summarize());
+        println!("Breaking news (again)! {}", item2.summarize());
     }
 }

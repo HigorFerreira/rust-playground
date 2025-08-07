@@ -19,6 +19,7 @@ fn main() {
         ),
     };
 
-    notify(&article);
-    notify(&post);
+    // notify(&article, &post); // It doesn't work
+    notify(&article, &article);
+    notify(&post, &post);
 }
