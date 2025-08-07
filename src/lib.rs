@@ -1,4 +1,6 @@
 pub mod aggregator {
+    use std::fmt::Display;
+
     pub trait Summary {
         fn summarize_author(&self) -> String;
         fn summarize(&self) -> String {
@@ -43,8 +45,7 @@ pub mod aggregator {
      * If we want to force both parameters to have the same type,
      * however, we must use a trait bound, like this:
      */
-    pub fn notify<T: Summary>(item1: &T, item2: &T){
-        println!("Breaking news! {}", item1.summarize());
-        println!("Breaking news (again)! {}", item2.summarize());
+    pub fn notify(item: &(impl Summary + Display)) {
+        println!("Breaking news! {}", item.summarize());
     }
 }
