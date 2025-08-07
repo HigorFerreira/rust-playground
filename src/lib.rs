@@ -45,7 +45,10 @@ pub mod aggregator {
      * If we want to force both parameters to have the same type,
      * however, we must use a trait bound, like this:
      */
-    pub fn notify<T: Summary + Display>(item: &T) {
+    pub fn notify<T>(item: &T)
+    where
+        T: Summary + Display
+    {
         println!("Breaking news! {}", item.summarize());
     }
 }
